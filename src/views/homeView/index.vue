@@ -1,22 +1,27 @@
 <template>
   <div class="home-container">
-  
+
 
     <!-- 头图 & 标题 -->
     <section class="hero">
+      <!-- 背景轮播放在最底层 -->
+      <div class="carousel">
+        <img v-for="(src, idx) in randomFive" :key="idx" :src="src" class="carousel-image"
+          :class="{ active: idx === currentIndex }" />
+      </div>
       <div class="hero-content">
         <h1>欢迎来到鸣潮游戏工具箱</h1>
         <p>一站式辅助，提高游戏体验</p>
         <button class="btn-primary">立即体验</button>
       </div>
-      <div class="hero-image"></div>
+
     </section>
 
     <!-- 功能模块概览 -->
     <section class="features">
       <div class="feature-card" id="ai-chat">
         <h3>AI对话</h3>
-        <p>智能助手，解答游戏相关问题</p>
+        <p>与角色沉浸式互动，体验专属剧情交流</p>
       </div>
       <div class="feature-card" id="team-build">
         <h3>阵容搭配</h3>
@@ -40,7 +45,40 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
+
+
+// 1. 全量导入，直接映射成 string[]
+const modules = import.meta.glob("@/assets/images1/*.{jpg,png,jpeg}", {
+  eager: true,
+});
+const allSrcs: string[] = Object.values(modules).map((mod: any) => mod.default);
+
+// 2. 洗牌并取 5 张
+function shuffle<T>(arr: T[]): T[] {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+const randomFive = ref<string[]>(shuffle(allSrcs).slice(0, 5));
+
+const currentIndex = ref(0);
+let timer: number;
+
+onMounted(() => {
+  // 2. 每 5 秒切换一次
+  timer = window.setInterval(() => {
+    currentIndex.value = (currentIndex.value + 1) % randomFive.value.length;
+  }, 5000);
+});
+
+
+onUnmounted(() => {
+  clearInterval(timer);
+});
 
 
 </script>
@@ -50,18 +88,53 @@ import { ref, onMounted } from 'vue';
   font-family: 'PingFang SC', sans-serif;
   color: #fff;
   background: #0d0d1a;
-
+  margin-top: 60px;
 
   .hero {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 8rem 2rem 4rem;
-    // background: url('@/assets/hero-bg.jpg') no-repeat center/cover;
+    justify-content: center;
+    position: relative;
     min-height: 80vh;
+
+    .carousel {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+
+      /* 放在最底层 */
+      /* 叠加所有图片，通过 opacity 实现切换 */
+      .carousel-image {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        transition: opacity 1s ease;
+        filter: blur(1.5px);
+        /* 轻微模糊 */
+      }
+
+      .carousel-image.active {
+        opacity: 1;
+      }
+    }
+
+    /* 遮罩层 */
+    .carousel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.2);
+      /* 遮罩透明度可调 */
+      pointer-events: none;
+      z-index: 1;
+    }
 
     .hero-content {
       max-width: 50%;
+      z-index: 1;
 
       h1 {
         font-size: 3rem;
@@ -90,19 +163,14 @@ import { ref, onMounted } from 'vue';
       }
     }
 
-    .hero-image {
-      width: 40%;
-      height: 60vh;
-      // background: url('@/assets/hero-character.png') no-repeat center/contain;
-    }
+
   }
 
   .features {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 2rem;
-    padding: 4rem 2rem;
-
+ 
     .feature-card {
       background: rgba(255, 255, 255, 0.05);
       padding: 2rem;

@@ -11,8 +11,8 @@ const router = createRouter({
       component: () => import("@/views/homeView/index.vue"),
     },
     {
-      path: "/message",
-      component: () => import("@/views/messageView/index.vue"),
+      path: "/chat",
+      component: () => import("@/views/AIChatView/index.vue"),
     },
   ],
   scrollBehavior() {

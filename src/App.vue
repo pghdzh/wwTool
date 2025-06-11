@@ -16,12 +16,12 @@ import AppHeader from '@/components/AppHeader.vue'
 <style scoped>
 #app {
   position: relative;
-  min-height: 100vh;
 
   .nav{
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 10;
   }
 }
 </style>
