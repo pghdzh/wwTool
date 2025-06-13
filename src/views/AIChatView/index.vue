@@ -178,6 +178,14 @@ onMounted(() => loadHistory(selectedRole.value));
         margin-bottom: 0.5rem;
       }
 
+      &.active img {
+        /* 外层光环 */
+        box-shadow: 0 0 0 4px rgba(250, 66, 153, 0.6),
+          0 0 8px rgba(250, 66, 153, 0.4),
+          0 0 16px rgba(164, 69, 178, 0.3);
+        transition: box-shadow 0.3s ease;
+      }
+
       span {
         color: #ccc;
         font-size: 0.875rem;
@@ -189,6 +197,20 @@ onMounted(() => loadHistory(selectedRole.value));
     flex: 1;
     overflow-y: auto;
     padding: 1rem;
+
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: rgba(13, 13, 26, 0.5);
+      border-radius: 3px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: linear-gradient(45deg, #fa4299, #a445b2);
+      border-radius: 3px;
+    }
 
     .message-fade-enter-active {
       transition: all 0.3s ease-out;
@@ -368,7 +390,78 @@ onMounted(() => loadHistory(selectedRole.value));
       }
     }
 
-   
+
+  }
+
+  @media (max-width: 600px) {
+    /* 容器满屏，高度去掉 margin-top */
+    height: 100vh !important;
+    margin-top: 0 !important;
+
+    .role-selector {
+      padding: 0.5rem;
+      overflow-x: auto;
+
+      .role-btn {
+        margin: 0 0.5rem;
+
+        img {
+          width: 40px;
+          height: 40px;
+        }
+
+        span {
+          font-size: 0.75rem;
+        }
+      }
+    }
+
+    .chat-window {
+      padding: 0.5rem;
+
+      .message {
+        .bubble {
+          max-width: 80%;
+          font-size: 0.875rem;
+        }
+
+        .avatar {
+          width: 28px;
+          height: 28px;
+        }
+      }
+    }
+
+    .input-area {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 0.5rem;
+      background: rgba(13, 13, 26, 0.9);
+
+      .input-row {
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+
+      textarea {
+        height: 3.5rem;
+        font-size: 0.875rem;
+      }
+
+      .actions-vertical {
+        flex-direction: row;
+        justify-content: flex-end;
+        gap: 0.5rem;
+
+        .btn-clear,
+        .btn-send {
+          width: 60px;
+          font-size: 0.75rem;
+        }
+      }
+    }
   }
 }
 </style>

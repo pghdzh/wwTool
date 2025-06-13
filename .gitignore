@@ -28,4 +28,4 @@ public/voice
 src/assets/images/*
 src/assets/images2/*
 dist.rar
-src/assets/api/deepseekApi.ts
+src/api/deepseekApi.ts

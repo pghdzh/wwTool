@@ -14,6 +14,22 @@ const router = createRouter({
       path: "/chat",
       component: () => import("@/views/AIChatView/index.vue"),
     },
+    {
+      path: "/team-build",
+      component: () => import("@/views/teamView/index.vue"),
+    },
+    {
+      path: "/route-map",
+      component: () => import("@/views/routeMapView/index.vue"),
+    },
+    {
+      path: "/discussion",
+      component: () => import("@/views/discussionView/index.vue"),
+    },
+    {
+      path: "/gallery",
+      component: () => import("@/views/galleryView/index.vue"),
+    },
   ],
   scrollBehavior() {
     return { top: 0 };
