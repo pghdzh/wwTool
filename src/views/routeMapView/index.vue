@@ -35,10 +35,15 @@ import { ref, computed, watch } from 'vue';
 
 interface Route { id: string; name: string; image: string; }
 const routes = ref<Route[]>([
+  { id: 'COST1-愿戴荣光之旅（高效）v2.4.4', name: 'COST1-愿戴荣光之旅（高效）v2.4.4', image: new URL('@/assets/routes/COST1-愿戴荣光之旅（高效）v2.4.4.png', import.meta.url).href },
+  { id: 'COST3-奔狼燎原之焰（高效）v2.4.0', name: 'COST3-奔狼燎原之焰（高效）v2.4.0', image: new URL('@/assets/routes/COST3-奔狼燎原之焰（高效）v2.4.0.png', import.meta.url).href },
+  { id: 'Cost3-此间永驻之光（高效）v2.2.0', name: 'Cost3-此间永驻之光（高效）v2.2.0', image: new URL('@/assets/routes/Cost3-此间永驻之光（高效）v2.2.0.png', import.meta.url).href },
+  { id: 'cost3-湮灭(高效)  v1.31.1', name: 'cost3-湮灭(高效)  v1.31.1', image: new URL('@/assets/routes/cost3-湮灭(高效)  v1.31.1.png', import.meta.url).href },
+
   { id: 'v2.2.1', name: 'v2.2.1_黎那汐塔新COST3-精简版', image: new URL('@/assets/routes/v2.2.1_黎那汐塔新COST3-精简版.png', import.meta.url).href },
-  { id: 'cost3-eternal-light', name: 'Cost3 - 此间永驻之光', image: new URL('@/assets/routes/cost3-eternal-light.jpg', import.meta.url).href },
-  { id: 'cost4-storm-of-blades', name: 'Cost4 - 刃雨风暴', image: new URL('@/assets/routes/cost4-storm-of-blades.jpg', import.meta.url).href },
-  { id: 'cost5-void-empire', name: 'Cost5 - 虚空帝国', image: new URL('@/assets/routes/cost5-void-empire.jpg', import.meta.url).href },
+  { id: '全图贝币线-黎那汐塔v2.2.2', name: '全图贝币线-黎那汐塔v2.2.2', image: new URL('@/assets/routes/全图贝币线-黎那汐塔v2.2.2.png', import.meta.url).href },
+  { id: 'COST1-凌冽决断之心v2.0.2', name: 'COST1-凌冽决断之心v2.0.2', image: new URL('@/assets/routes/COST1-凌冽决断之心v2.0.2.jpg', import.meta.url).href },
+  { id: 'COST1-湮灭（高效）', name: 'COST1-湮灭（高效）', image: new URL('@/assets/routes/COST1-湮灭（高效）.png', import.meta.url).href },
 ]);
 
 const selectedRouteId = ref(routes.value[0].id);

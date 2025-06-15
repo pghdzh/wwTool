@@ -54,6 +54,8 @@ import changli from '@/assets/avatar/changli.webp';
 const roles = [
   { id: 'jinxi', name: '今汐', avatar: jinxi },
   { id: 'changli', name: '长离', avatar: changli },
+  {id:'chun',name:'椿',avatar: new URL('@/assets/avatar/chun.webp', import.meta.url).href},
+  {id:'shouanren',name:'守岸人',avatar: new URL('@/assets/avatar/shouanren.webp', import.meta.url).href}
 ];
 const selectedRole = ref<string>(roles[0].id);
 const userAvatar = manAvatar;
